@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // My New Hugo Site</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/ysumgl.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="title: &ldquo;Blog&rdquo; date: 2019-05-11T19:40:59&#43;08:00 draft: true
+SpringMVC理解 一、SpringMVC前奏 1.常用注解 @Controller,@RequestMapping,@Autowired,@RequestParam,@Service
+2.简单代码演示 /** * 更新文章 * @param article * @return */ @RequestMapping(&quot;updatearticle&quot;) @ResponseBody public String updateArticle(Article article){ String msg = &quot;1&quot;; try { userService.updateArticle(article); msg = &quot;0&quot;; }catch (Exception e){ e.printStackTrace(); } return msg; }  3.SpringMVC是啥？ SpirngMVC是由servlet包装而来，封装成了一个叫做DispatchServlet的类。
+在web.xml中的配置如下：
+&lt;servlet&gt; &lt;servlet-name&gt;boot-crm&lt;/servlet-name&gt; &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt; &lt;init-param&gt; &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt; &lt;param-value&gt;classpath:spring/springmvc.xml&lt;/param-value&gt; &lt;/init-param&gt; &lt;!-- 配置springmvc什么时候启动，参数必须为整数 --&gt; &lt;!-- 如果为0或者大于0，则springMVC随着容器启动而启动 --&gt; &lt;!-- 如果小于0，则在第一次请求进来的时候启动 --&gt; &lt;load-on-startup&gt;1&lt;/load-on-startup&gt; &lt;/servlet&gt; &lt;servlet-mapping&gt; &lt;servlet-name&gt;boot-crm&lt;/servlet-name&gt; &lt;url-pattern&gt;*.action&lt;/url-pattern&gt; &lt;/servlet-mapping&gt;  4."/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="title: &ldquo;Blog&rdquo; date: 2019-05-11T19:40:59&#43;08:00 draft: true
+SpringMVC理解 一、SpringMVC前奏 1.常用注解 @Controller,@RequestMapping,@Autowired,@RequestParam,@Service
+2.简单代码演示 /** * 更新文章 * @param article * @return */ @RequestMapping(&quot;updatearticle&quot;) @ResponseBody public String updateArticle(Article article){ String msg = &quot;1&quot;; try { userService.updateArticle(article); msg = &quot;0&quot;; }catch (Exception e){ e.printStackTrace(); } return msg; }  3.SpringMVC是啥？ SpirngMVC是由servlet包装而来，封装成了一个叫做DispatchServlet的类。
+在web.xml中的配置如下：
+&lt;servlet&gt; &lt;servlet-name&gt;boot-crm&lt;/servlet-name&gt; &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt; &lt;init-param&gt; &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt; &lt;param-value&gt;classpath:spring/springmvc.xml&lt;/param-value&gt; &lt;/init-param&gt; &lt;!-- 配置springmvc什么时候启动，参数必须为整数 --&gt; &lt;!-- 如果为0或者大于0，则springMVC随着容器启动而启动 --&gt; &lt;!-- 如果小于0，则在第一次请求进来的时候启动 --&gt; &lt;load-on-startup&gt;1&lt;/load-on-startup&gt; &lt;/servlet&gt; &lt;servlet-mapping&gt; &lt;servlet-name&gt;boot-crm&lt;/servlet-name&gt; &lt;url-pattern&gt;*.action&lt;/url-pattern&gt; &lt;/servlet-mapping&gt;  4." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="ysumgl.github.io/springmvc%E7%90%86%E8%A7%A3/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="ysumgl.github.io"><img class="app-header-avatar" src="/ysumgl.github.io/avatar.jpg" alt="John Doe" /></a>
+      <h1>My New Hugo Site</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<p>title: &ldquo;Blog&rdquo;
+date: 2019-05-11T19:40:59+08:00
+draft: true</p>
+
+<h2 id="springmvc理解">SpringMVC理解</h2>
+
+<h3 id="一-springmvc前奏">一、SpringMVC前奏</h3>
+
+<h4 id="1-常用注解">1.常用注解</h4>
+
+<p><strong>@Controller,@RequestMapping,@Autowired,@RequestParam,@Service</strong></p>
+
+<h4 id="2-简单代码演示">2.简单代码演示</h4>
+
+<pre><code class="language-java">/**
+     * 更新文章
+     * @param article
+     * @return
+     */
+    @RequestMapping(&quot;updatearticle&quot;)
+    @ResponseBody
+    public String updateArticle(Article article){
+        String msg = &quot;1&quot;;
+
+        try {
+            userService.updateArticle(article);
+            msg = &quot;0&quot;;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return msg;
+    }
+</code></pre>
+
+<h4 id="3-springmvc是啥">3.SpringMVC是啥？</h4>
+
+<p>SpirngMVC是由servlet包装而来，封装成了一个叫做DispatchServlet的类。</p>
+
+<p>在web.xml中的配置如下：</p>
+
+<pre><code class="language-xml">&lt;servlet&gt;
+        &lt;servlet-name&gt;boot-crm&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:spring/springmvc.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;!-- 配置springmvc什么时候启动，参数必须为整数 --&gt;
+        &lt;!-- 如果为0或者大于0，则springMVC随着容器启动而启动 --&gt;
+        &lt;!-- 如果小于0，则在第一次请求进来的时候启动 --&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;boot-crm&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+</code></pre>
+
+<h4 id="4-ioc容器简介">4.IOC容器简介</h4>
+
+<p>IOC容器实质上是一个Map，大致如下</p>
+
+<pre><code class="language-java">Map iocMap = new HashMap();
+OrderServlce orderService = new OrderService();
+iocMap.put(&quot;orderService&quot;,orderService);
+
+//使用的时候
+@Autowired
+//直接取出：iocMap.get(&quot;orderService&quot;);
+private OrderService orderService;
+</code></pre>
+
+<h4 id="5-tomcat启动加载springmvc开发的war流程">5.Tomcat启动加载SpringMVC开发的war流程</h4>
+
+<h5 id="tomcat启动">Tomcat启动</h5>
+
+<p>①加载war包中的class文件</p>
+
+<p>②创建IOC容器，即Map对象</p>
+
+<p>③通过ScanbasePackage类：扫描war包下的@Controller，@Service注解的类</p>
+
+<p>④实例化：将扫描到的类通过反射实例化，并放入IOC容器中（Map）</p>
+
+<p>⑤依赖注入：将存在依赖的bean注入</p>
+
+<p>⑥UrlMapping：http请求路径与Method建立映射关系</p>
+
+<h5 id="tomcat工作">Tomcat工作</h5>
+
+<p>①发送http请求，调用servlet的doGet/doPost方法</p>
+
+<p>②找到从UrlMapping中对应的method方法对象</p>
+
+<p>③找到Method对象方法后，直接调用</p>
+
+<p>④相应返回结果</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

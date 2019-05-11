@@ -2,13 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>My New Hugo Site</title>
-    <link>https://ysumgl.github.io/</link>
+    <link>ysumgl.github.io/</link>
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://ysumgl.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="ysumgl.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title></title>
+      <link>ysumgl.github.io/springmvc%E7%90%86%E8%A7%A3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>ysumgl.github.io/springmvc%E7%90%86%E8%A7%A3/</guid>
+      <description>title: &amp;ldquo;Blog&amp;rdquo; date: 2019-05-11T19:40:59+08:00 draft: true
+SpringMVC理解 一、SpringMVC前奏 1.常用注解 @Controller,@RequestMapping,@Autowired,@RequestParam,@Service
+2.简单代码演示 /** * 更新文章 * @param article * @return */ @RequestMapping(&amp;quot;updatearticle&amp;quot;) @ResponseBody public String updateArticle(Article article){ String msg = &amp;quot;1&amp;quot;; try { userService.updateArticle(article); msg = &amp;quot;0&amp;quot;; }catch (Exception e){ e.printStackTrace(); } return msg; }  3.SpringMVC是啥？ SpirngMVC是由servlet包装而来，封装成了一个叫做DispatchServlet的类。
+在web.xml中的配置如下：
+&amp;lt;servlet&amp;gt; &amp;lt;servlet-name&amp;gt;boot-crm&amp;lt;/servlet-name&amp;gt; &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.DispatcherServlet&amp;lt;/servlet-class&amp;gt; &amp;lt;init-param&amp;gt; &amp;lt;param-name&amp;gt;contextConfigLocation&amp;lt;/param-name&amp;gt; &amp;lt;param-value&amp;gt;classpath:spring/springmvc.xml&amp;lt;/param-value&amp;gt; &amp;lt;/init-param&amp;gt; &amp;lt;!-- 配置springmvc什么时候启动，参数必须为整数 --&amp;gt; &amp;lt;!-- 如果为0或者大于0，则springMVC随着容器启动而启动 --&amp;gt; &amp;lt;!-- 如果小于0，则在第一次请求进来的时候启动 --&amp;gt; &amp;lt;load-on-startup&amp;gt;1&amp;lt;/load-on-startup&amp;gt; &amp;lt;/servlet&amp;gt; &amp;lt;servlet-mapping&amp;gt; &amp;lt;servlet-name&amp;gt;boot-crm&amp;lt;/servlet-name&amp;gt; &amp;lt;url-pattern&amp;gt;*.action&amp;lt;/url-pattern&amp;gt; &amp;lt;/servlet-mapping&amp;gt;  4.</description>
+    </item>
     
   </channel>
 </rss>
