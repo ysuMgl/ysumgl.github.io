@@ -3,22 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>ysumgl.github.io/springmvc%E7%90%86%E8%A7%A3/</loc>
+    <loc>https://github.com/ysuMgl/ysumgl.github.io.git/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>ysumgl.github.io/categories/</loc>
+    <loc>https://github.com/ysuMgl/ysumgl.github.io.git/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>ysumgl.github.io/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ysumgl.github.io/tags/</loc>
+    <loc>https://github.com/ysuMgl/ysumgl.github.io.git/tags/</loc>
     <priority>0</priority>
   </url>
   
