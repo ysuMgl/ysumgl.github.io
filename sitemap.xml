@@ -3,12 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ysumgl.github.io/categories/</loc>
-    <priority>0</priority>
+    <loc>https://ysumgl.github.io/hugo%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2019-05-11T20:19:07+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://ysumgl.github.io/</loc>
+    <lastmod>2019-05-11T20:19:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ysumgl.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
