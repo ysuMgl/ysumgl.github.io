@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+  	
+    <title>Guoliang Blog</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://ysumgl.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring 注解开发"/>
+<meta name="twitter:description" content="Spring 注解开发 1.@Bean注解和@Configration注解 在原来的Spring开发中，我们都是通过配置xml的方式，通过bean标签将对象放到IOC容器中，例如
+&lt;bean id = &quot;person&quot; class = &quot;cn.jack.Person&quot;&gt; &lt;property name = &quot;name&quot; value = &quot;zhangsan&quot;&gt;&lt;/property&gt; &lt;property name = &quot;age&quot; value = &quot;20&quot;&gt;&lt;/property&gt; &lt;/bean&gt;  然后在测试类中获取IOC容器中对象的方法为：
+@Test public void test1(){ ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;); Person person = (Person) applicationContext.getBean(&quot;person&quot;); System.out.println(person); }  如果通过Spring注解的方式，则不需要这些配置文件，需要建立一个配置类来顶替配置文件，在配置类上面标注@Configration注解，表明这个类是一个配置类。通过在类中定义相应返回值的方法，标注@Bean注解。Spring默认将方法名称作为id，方法返回值类型作为class，如果要自定义id的话，在@Bean注解value值设为相应的id。
+@Configuration public class MainConfig { @Bean public Person person(){ return new Person(&quot;lisi&quot;,20); } @Bean(&quot;person1&quot;) public Person other(){ return new Person(&quot;zhagnsan&quot;,18); } }  通过定义配置类，将相应对象放到了IOC容器中，那么我们如何像xml方式那种获取对应的ApplicationContext呢？"/>
+
+    <meta property="og:title" content="Spring 注解开发" />
+<meta property="og:description" content="Spring 注解开发 1.@Bean注解和@Configration注解 在原来的Spring开发中，我们都是通过配置xml的方式，通过bean标签将对象放到IOC容器中，例如
+&lt;bean id = &quot;person&quot; class = &quot;cn.jack.Person&quot;&gt; &lt;property name = &quot;name&quot; value = &quot;zhangsan&quot;&gt;&lt;/property&gt; &lt;property name = &quot;age&quot; value = &quot;20&quot;&gt;&lt;/property&gt; &lt;/bean&gt;  然后在测试类中获取IOC容器中对象的方法为：
+@Test public void test1(){ ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;); Person person = (Person) applicationContext.getBean(&quot;person&quot;); System.out.println(person); }  如果通过Spring注解的方式，则不需要这些配置文件，需要建立一个配置类来顶替配置文件，在配置类上面标注@Configration注解，表明这个类是一个配置类。通过在类中定义相应返回值的方法，标注@Bean注解。Spring默认将方法名称作为id，方法返回值类型作为class，如果要自定义id的话，在@Bean注解value值设为相应的id。
+@Configuration public class MainConfig { @Bean public Person person(){ return new Person(&quot;lisi&quot;,20); } @Bean(&quot;person1&quot;) public Person other(){ return new Person(&quot;zhagnsan&quot;,18); } }  通过定义配置类，将相应对象放到了IOC容器中，那么我们如何像xml方式那种获取对应的ApplicationContext呢？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ysumgl.github.io/spring-%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" />
+<meta property="article:published_time" content="2019-08-12T20:56:10&#43;08:00"/>
+<meta property="article:modified_time" content="2019-08-12T20:56:10&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://ysumgl.github.io/"><img class="app-header-avatar" src="/a.jpg" alt="John Doe" /></a>
+      
+	  <h1>Guoliang Blog</h1>
+      <p>Welcome Guoling Ma&#39;s blog</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Spring 注解开发</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 12, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h3 id="spring-注解开发">Spring 注解开发</h3>
+
+<h4 id="1-bean注解和-configration注解">1.@Bean注解和@Configration注解</h4>
+
+<p>在原来的Spring开发中，我们都是通过配置xml的方式，通过bean标签将对象放到IOC容器中，例如</p>
+
+<pre><code class="language-xml">&lt;bean id = &quot;person&quot; class = &quot;cn.jack.Person&quot;&gt;
+	&lt;property name = &quot;name&quot; value = &quot;zhangsan&quot;&gt;&lt;/property&gt;
+    &lt;property name = &quot;age&quot; value = &quot;20&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<p>然后在测试类中获取IOC容器中对象的方法为：</p>
+
+<pre><code class="language-java">	@Test
+    public void test1(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
+        Person person = (Person) applicationContext.getBean(&quot;person&quot;);
+        System.out.println(person);
+    }
+</code></pre>
+
+<p>如果通过Spring注解的方式，则不需要这些配置文件，需要建立一个配置类来顶替配置文件，在<strong>配置类上面标注@Configration注解</strong>，表明这个类是一个配置类。通过在类中定义相应返回值的方法，标注@Bean注解。<strong>Spring默认将方法名称作为id，方法返回值类型作为class</strong>，如果要自定义id的话，在@Bean注解value值设为相应的id。</p>
+
+<pre><code class="language-java">@Configuration
+public class MainConfig {
+
+    @Bean
+    public Person person(){
+        return new Person(&quot;lisi&quot;,20);
+    }
+
+    @Bean(&quot;person1&quot;)
+    public Person other(){
+        return new Person(&quot;zhagnsan&quot;,18);
+    }
+}
+</code></pre>
+
+<p>通过定义配置类，将相应对象放到了IOC容器中，那么我们如何像xml方式那种获取对应的ApplicationContext呢？</p>
+
+<p>也是类似，我们需要通过一个new 一个AnnotationConfigApplicationContext类的对象，这个对象也实现了ApplicationContext接口，需要传进去一个参数，就是这配置类的class对象。</p>
+
+<pre><code class="language-java">ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+</code></pre>
+
+<p>获取到ApplicationContext对象后，和xml方式的操作就保持一致了。可以获取IOC容器中的对象，getBean方法，获取对象名称等。</p>
+
+<h4 id="2-componentscan注解">2.@ComponentScan注解</h4>
+
+<p>@ComponentScan是组件包扫描注解，在 原来的xml开发中，在context:component-scan标签中添加相应的包名，将标有@Controller，@Service，@Repository，@Component注解的类放到IOC容器中</p>
+
+<pre><code class="language-xml">&lt;context:component-scan base-package=&quot;cn.jack&quot;/&gt;
+</code></pre>
+
+<p>在配置类上，与配置文件类似，我们需要在配置类上面添加@ComponentScan注解，查看@ComponentScan注解的代码，里面value对应的就是和配置文件类似的base-package，还有两个重要的</p>
+
+<pre><code class="language-java">	Filter[] includeFilters() default {};
+
+	Filter[] excludeFilters() default {};
+</code></pre>
+
+<p>其中<strong>includeFilters</strong>是只包含哪些，<strong>excludeFilters</strong>是不包含哪些，它们都是Filter数组型的。</p>
+
+<p>关于这个Filter，英文来说这个是过滤器，通过查看源代码发现，Filter也是一个注解，注解代码如下：</p>
+
+<pre><code class="language-java">@Retention(RetentionPolicy.RUNTIME)
+	@Target({})
+	@interface Filter {
+        
+		FilterType type() default FilterType.ANNOTATION;
+        
+		@AliasFor(&quot;classes&quot;)
+		Class&lt;?&gt;[] value() default {};
+
+		@AliasFor(&quot;value&quot;)
+		Class&lt;?&gt;[] classes() default {};
+
+		String[] pattern() default {};
+	}
+</code></pre>
+
+<p>我们需要定义过滤的方法，即FilterType，默认值为ANNOTATION注解，还有ASSIGNABLE_TYPE：类，aspectj，正则等。</p>
+
+<p>所以如果我们要想排除标注某些注解的类如@Controller和@Service注解，那么，我们应该怎么做呢？</p>
+
+<h4 id="3-filtertype设置指定过滤规则">3.FilterType设置指定过滤规则</h4>
+
+<h5 id="①通过excludefilters排除指定注解包含的类">①通过excludeFilters排除指定注解包含的类</h5>
+
+<pre><code class="language-java">@ComponentScan(value = &quot;cn.jack&quot; ,excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {
+                Controller.class, Service.class
+        })
+})
+</code></pre>
+
+<h5 id="②通过includefilters只包含特定注解标注的类">②通过includeFilters只包含特定注解标注的类</h5>
+
+<p>如果要只包换@Controller和@Service注解的类呢，主要要添加一个useDefaultFilters = false,禁用默认的过滤器（全包含）。</p>
+
+<pre><code class="language-java">@ComponentScan(value = &quot;cn.jack&quot; ,includeFilters = {
+        @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {
+                Controller.class,Service.class
+        })
+},useDefaultFilters = false)
+</code></pre>
+
+<h5 id="③自定义规则匹配">③自定义规则匹配</h5>
+
+<p>如果想自定义匹配规则的话，需要在Filter的type中设置type = FilterType.CUSTOM，classes中写实现TypeFilter接口的class对象。</p>
+
+<pre><code class="language-java">@ComponentScan(value = &quot;cn.jack&quot; ,includeFilters = {
+        @ComponentScan.Filter(type = FilterType.CUSTOM,classes = {
+                MyTypeFilter.class
+        })
+},useDefaultFilters = false)
+</code></pre>
+
+<pre><code class="language-java">public class MyTypeFilter implements TypeFilter {
+
+    /**
+     *
+     * @param metadataReader
+     * @param metadataReaderFactory
+     * @return
+     * @throws IOException
+     */
+    @Override
+    public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
+
+        //获取当前注解类的信息
+        AnnotationMetadata annotationMetadata = metadataReader.getAnnotationMetadata();
+        //获取当前正在扫描的类的类信息
+        ClassMetadata classMetadata = metadataReader.getClassMetadata();
+        //获取当前类资源（类的路径）
+        Resource resource = metadataReader.getResource();
+
+        String className = classMetadata.getClassName();
+        System.out.println(&quot;---&gt;&quot; + className);
+        if(className.contains(&quot;er&quot;)){
+            return true;
+        }
+        return false;
+    }
+}
+
+</code></pre>
+
+<h4 id="4-scope注解">4.@Scope注解</h4>
+
+<p>顾名思义哈，scope是作用域的意思，在spring中可以有四种作用域，一个是单实例，一个是多实例，request域，session域。</p>
+
+<p>在xml中，也有相似的配置。在每个bean标签中有一个scope属性，属性的值也是这四个。</p>
+
+<pre><code class="language-java">   /**
+	 * @see ConfigurableBeanFactory#SCOPE_PROTOTYPE
+	 * @see ConfigurableBeanFactory#SCOPE_SINGLETON
+	 * @see org.springframework.web.context.WebApplicationContext#SCOPE_REQUEST
+	 * @see org.springframework.web.context.WebApplicationContext#SCOPE_SESSION
+     */
+
+	String SCOPE_SINGLETON = &quot;singleton&quot;;
+	String SCOPE_PROTOTYPE = &quot;prototype&quot;;
+
+	String SCOPE_REQUEST = &quot;request&quot;;
+	String SCOPE_SESSION = &quot;session&quot;;
+</code></pre>
+
+<p>SCOPE_SINGLETON：单实例，Spring默认。对象在IOC容器创建之后就会放入进去。</p>
+
+<p>SCOPE_PROTOTYPE：多实例，对象在IOC容器创建之后不会立马放进去，在通过getBean方法取相应的对象的之前放进去，每次通过getBean取一次，就会放入一次。</p>
+
+<p>SCOPE_REQUEST：每一次的request请求，创建一个相应的对象（不用，一般我们通过直接setAttribute方法将相应对象放入容器中）</p>
+
+<p>SCOPE_SESSION：每次回话，创建一个相应的对象（也不用，同上）</p>
+
+<h4 id="5-lazy懒加载注解">5.@Lazy懒加载注解</h4>
+
+<p>@Lazy注解只针对于<strong>单实例</strong>。这个比较好理解，因为单实例状态下，在容器初始化完成后就会向IOC容器中添加组件。但是标注@Lazy注解后，添加组件是在第一次使用时添加，并且也只会添加一次。</p>
+
+<h4 id="6-conditional注解">6.@Conditional注解</h4>
+
+<p>规定需要添加一些条件，只有满足条件才能将对象注册到IOC容器中。@Conditional注解中的value值为Condition接口的实现类，所以要自定义一个类来实现Condition接口，定义匹配规则。</p>
+
+<p>这个注解可以定义在类上面，还可以定义在方法上面。</p>
+
+<ul>
+<li>定义在类上面，表示当匹配满足匹配规则时，将类上的所有bean都放到IOC容器中。</li>
+<li>定义在方法上面，表示当满足匹配规则时，将标注@Bean注解对应的方法的返回值放到IOC容器中。</li>
+</ul>
+
+<pre><code class="language-java">public @interface Conditional {
+    //value值为Condition接口的实现类
+	Class&lt;? extends Condition&gt;[] value();
+}
+</code></pre>
+
+<pre><code class="language-java">public interface Condition {
+
+	boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata);
+
+}
+</code></pre>
+
+<p>其中</p>
+
+<ul>
+<li>ConditionContext：这个类的对象表示判断条件的上下文（条件）</li>
+<li>AnnotatedTypeMetadata：这个类的对象表示注释信息</li>
+</ul>
+
+<pre><code class="language-java">public interface ConditionContext {
+	//获取到bean定义的注册类，用于注册bean的类
+	BeanDefinitionRegistry getRegistry();
+    //获取到bean的创建工厂，IOC的beanFactory
+	ConfigurableListableBeanFactory getBeanFactory();
+    //得到当前环境信息
+	Environment getEnvironment();
+	ResourceLoader getResourceLoader();
+    //得到类加载器
+	ClassLoader getClassLoader();
+
+}
+</code></pre>
+
+<h4 id="7-import注解">7.Import注解</h4>
+
+<p>和<strong>@Bean</strong>注解实现的功能类似，都是向容器中添加组件，不同的是，@Import注解是添加在配置类上面，注解内部的参数是class类型的数组，文档中写到，可以导入的有标注@Configration注解、ImportSelector实现类、ImportBeanDefinitionRegistrar实现类和一些常规的类。</p>
+
+<pre><code class="language-java">public @interface Import {
+
+	/**
+	 * {@link Configuration}, {@link ImportSelector}, {@link ImportBeanDefinitionRegistrar}
+	 * or regular component classes to import.
+	 */
+	Class&lt;?&gt;[] value();
+
+}
+</code></pre>
+
+<ul>
+<li>@Configuration：标注这个注解的类成为配置类，替代配置文件用的。把这个class导入进来后，这个配置类中添加到IOC容器的对象，同样也会添加到新的配置类对应的IOC容器中。</li>
+<li>ImportSelector：这个是接口，实现类需要重写返回值为String[] 的方法selectImports，即将需要导入的类的全路径写在这数组中。</li>
+</ul>
+
+<pre><code class="language-java">public interface ImportSelector {
+
+	/**
+	 * Select and return the names of which class(es) should be imported based on
+	 * the {@link AnnotationMetadata} of the importing @{@link Configuration} class.
+	 */
+	String[] selectImports(AnnotationMetadata importingClassMetadata);
+
+}
+</code></pre>
+
+<ul>
+<li>ImportBeanDefinitionRegistrar：这也是一个接口，实现类需要重写方法如下</li>
+</ul>
+
+<pre><code class="language-java">public interface ImportBeanDefinitionRegistrar {
+
+	public void registerBeanDefinitions(
+			AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry);
+
+}
+</code></pre>
+
+<ul>
+<li>- AnnotationMetadata：注解信息
+
+<ul>
+<li>BeanDefinitionRegistry：bean的定义注册类，可以通过这个对象自定义向IOC容器中注入组件。</li>
+</ul></li>
+</ul>
+
+<h4 id="8-通过factorybean工厂创建实例-放到ioc容器">8.通过FactoryBean工厂创建实例，放到IOC容器</h4>
+
+<p>FactoryBean是接口，在IOC容器中添加这个接口的实现类后，通过getBean返回得到的对象是这个工厂的getObject方法的返回值。</p>
+
+<pre><code class="language-java">public interface FactoryBean&lt;T&gt; {
+
+	T getObject() throws Exception;
+
+	Class&lt;?&gt; getObjectType();
+
+	boolean isSingleton();
+}
+</code></pre>
+
+<p>可以自定义一个工厂，比如ColorFactoryBean，这个工厂就是实例化Color对象的工厂，放到IOC容器中，getBean得到的就是color对象，比如：</p>
+
+<pre><code class="language-java">public class ColorFactoryBean implements FactoryBean&lt;Color&gt; {
+    @Override
+    public Color getObject() throws Exception {
+        return new Color();
+    }
+
+    @Override
+    public Class&lt;?&gt; getObjectType() {
+        return Color.class;
+    }
+
+    @Override
+    public boolean isSingleton() {
+        return true;
+    }
+}
+</code></pre>
+
+<p>在配置类中添加一个bean为ColorFactoryBean，通过getBean后得到的就是color。</p>
+
+<p><strong>但是如果你想得到这个工厂对象的话，需要在getBean中id加一个“&amp;”号，Spring在BeanFactory接口中定义了前缀为这个符号。</strong></p>
+
+<h4 id="9-对象的初始化方法和销毁方法">9.对象的初始化方法和销毁方法</h4>
+
+<ul>
+<li>自定义初始化方法和销毁方法
+
+<ul>
+<li>类似于配置文件，在bean标签中配置init-method属性和destroy-method属性，来指定对象的初始化和销毁方法，方法中不能有任何的参数，但可以抛出任何异常。</li>
+<li>在配置类中的写法是，在bean注解中，写出对应的initMethod方法和destroyMethod方法。</li>
+<li>对于单实例来说，在容器初始化的时候就会把对应的对象放到IOC容器中，也会调用它的initMethod，在容器关闭时，会调用对象的destroyMethod。</li>
+<li>对于多实例来说，在容器初始化的时候不会将对象放到IOC容器中，只有在你要调用这个对象的时候，IOC容器才会给你实例对象，并放到IOC容器中。而且，在容器关闭的时候，对象也不会销毁。这表明，IOC容器只是帮你实例化对象，对于对象的销毁工作，将由你自己来完成。</li>
+</ul></li>
+<li>使用Spring为我们提供的两个接口来实现对象的初始化和销毁方法
+
+<ul>
+<li>InitializingBean接口：内有方法afterPropertiesSet，即属性设置完成后的方法，也就是初始化方法。</li>
+<li>DisposableBean接口：内有方法destroy，对象的销毁方法。</li>
+</ul></li>
+<li>基于jsr250注解来实现
+
+<ul>
+<li>@PostConstruct注解：对象实例化，并做好初始化工作的时候被调用。</li>
+<li>@PreDestroy注解：在销毁对象前进行回调。</li>
+</ul></li>
+<li>实现BeanPostProcessor接口（后置处理器），接口定义了两个方法，postProcessBeforeInitialization和postProcessAfterInitialization。
+
+<ul>
+<li>postProcessBeforeInitialization：在你给定的bean的初始化方法调用之前调用，这些初始化方法包括自定义的init-method方法或者实现Spring的InitializingBean接口的afterPropertiesSet方法调用之前调用。</li>
+<li>postProcessAfterInitialization：在你给定的bean的初始化方法调用之后调用，这些初始化方法包括自定义的init-method方法或者实现Spring的DisposableBean接口的destroy方法调用之后调用。</li>
+</ul></li>
+</ul>
+
+<h4 id="10-理解beanpostprocessor实现原理-看源码-有点难">10.理解BeanPostProcessor实现原理（看源码，有点难）</h4>
+
+<p>在执行postProcessBeforeInitialization方法或postProcessAfterInitialization方法上面添加断点，debug调试测试类。最后找到initializeBean这个方法，点进去查看，会先执行applyBeanPostProcessorsBeforeInitialization这个方法，也就是调用对象初始化方法前执行的方法；然后执行invokeInitMethods方法，就是初始化方法，最后就是执行applyBeanPostProcessorsAfterInitialization方法，即初始化方法执行之后调用的方法。</p>
+
+<ul>
+<li>首先执行populateBean方法，给属性设置值。</li>
+<li>执行initializeBean方法
+
+<ul>
+<li>applyBeanPostProcessorsBeforeInitialization</li>
+<li>invokeInitMethods</li>
+<li>applyBeanPostProcessorsAfterInitialization</li>
+</ul></li>
+</ul>
+
+<h4 id="11-beanpostprocessor接口在spring其他类中的使用">11.BeanPostProcessor接口在Spring其他类中的使用</h4>
+
+<p>首先咱们来看一下Spring中BeanPostProcessor接口的实现类：</p>
+
+<p><img src="C:UsersMGLDesktop学习笔记Spring中所有BeanPostProcessor的实现类.jpg" alt="Spring中所有BeanPostProcessor的实现类" /></p>
+
+<p>介绍其中的几个：</p>
+
+<ul>
+<li>ApplicationContextAwareProcessor：这个可以在我们的<strong>组件</strong>（注入到IOC容器中的的对象）中注入IOC容器。
+
+<ul>
+<li>具体的注入步骤是：在相应的组件中，实现ApplicationContextAware接口，这个接口有一个方法：public void setApplicationContext(ApplicationContext applicationContext) ，参数就是Spring传入的IOC容器，可以注入到我们的组件中。</li>
+<li>注入的时间为：官方文档中写道：注入时间时时在组件的属性赋值完成之后，但是在初始化方法执行之前。参考ApplicationContextAwareProcessor类的源码来看，注入是在postProcessBeforeInitialization这个方法中执行的，也就是之前说的在初始化方法调用前。</li>
+</ul></li>
+<li>BeanValidationPostProcessor：进行数据校验。
+
+<ul>
+<li>&mdash;&ndash;在Javabean的初始化方法执行之前之后等，进行校验。</li>
+</ul></li>
+</ul>
+
+<h4 id="12-value注解和-propertysource注解给对象的属性赋值">12.@Value注解和@PropertySource注解给对象的属性赋值</h4>
+
+<ul>
+<li>@Value注解的使用方法：
+
+<ul>
+<li>基本的数据类型（int，String，boolean等）</li>
+<li>SpEL:用<strong>#{}</strong>的方式，可以计算表达式的值，例如#{20-2}</li>
+<li>用${}的方式，可以取出配置文件中的值（key，value）的方式</li>
+<li>在xml中，我们要加载一个配置文件，需要先引入context约束，在配置文件中写 <context:property-placeholder location="classpath:jdbc.properties" />类似。</li>
+<li>在配置类中，我们我们在类中加上@PropertySource注解，其中的value是一个String类型的数组，可以是多个配置文件。运行时会把这些配置存到环境变量中，可以通过IOC容器获取环境对象Environment，通过这个对象，相应设定的属性就可得到。</li>
+</ul></li>
+</ul>
+
+<h4 id="13-使用-autowired注解自动注入的讲解">13.使用@Autowired注解自动注入的讲解</h4>
+
+<ul>
+<li>如果不加任何说明，Spring是默认按照<strong>类型</strong>来自动注入的。</li>
+<li>如果IOC容器中含有这个类型的多个组件，则将属性的名字作为属性的id来查找。</li>
+<li>通过@Qualifie注解来指定装配那个组件，value值为属性id。</li>
+<li>通过@Primary注解：让Spring自动装配的时候，默认使用首选的bean。</li>
+</ul>
+
+<p>详解@Autowired注解：</p>
+
+<ul>
+<li><p>这个注解可以标注在<strong>构造器，方法，方法参数，属性，注解</strong>上。其实都是从IOC容器中获取相应的值。</p>
+
+<ul>
+<li><p>关于这个@Autowired注解可以放到类的任意方法中，如下所示。如果这个类中只有一个有参数的构造器，那么可以不写@Autowired这个注解（只可以通过这个构造器实例化对象）。</p></li>
+
+<li><p>在@Bean标注的方法创建对象的时候，相应的参数也是从IOC容器中获取的。</p></li>
+</ul>
+
+<pre><code class="language-java">@Component
+public class Boss {
+
+     @Autowired
+    private Car car;
+
+     @Autowired
+    public Boss( @Autowired Car car) {
+        this.car = car;
+    }
+
+    @Autowired
+    public Car getCar() {
+        return car;
+    }
+
+     @Autowired
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Boss{&quot; +
+                &quot;car=&quot; + car +
+                '}';
+    }
+}
+</code></pre>
+
+<h4 id="14-使用-resource和-inject注解实现自动注入">14.使用@Resource和@Inject注解实现自动注入</h4>
+
+<ul>
+<li>@Resource注解：Java 的JSR250规范，可以实现自动注入。</li>
+<li>缺点：默认是按照名称来注入，不支持<strong>@Primary</strong>注解，默认首选注入。</li>
+<li>@Inject注解：Java的JSR330规范，可以实现自动注入。</li>
+<li>与@Autowired注解相比，和它实现的功能一致，支持@Primary注解，可以实现默认的首选注入。但是没有、@Autowired的required=false（意思是不必须，可以为null）</li>
+</ul>
+
+<p><strong>@Autowired以及@Resource和@Inject注解的工作都是由AutowiredAnnotationBeanPostProcessor这个后置处理器完成工作的。</strong></p>
+
+<h4 id="15-通过aware接口给自定义的组件添加spring底层的组件-例如applicationcontext-beanfactory等">15.通过Aware接口给自定义的组件添加Spring底层的组件（例如ApplicationContext，Beanfactory等）</h4>
+
+<p>Spring给我们提供了很大的便利，如果我们想在自己定义的组件中添加Spring底层的一些组件，我们只需实现对应的xxxAware接口：例如，我想在我的组件中添加一个ApplicationContext组件，那么我只需要实现ApplicationContextAware接口，Spring在给我们向IOC容器添加组件的时候，就会采用回调的方式，向我们的组件中添加Spring底层的组件。</p>
+
+<p>Spring的Aware接口如下：</p>
+
+<p><img src="C:UsersMGLDesktopSnipaste_2019-06-16_13-51-13.jpg" alt="Snipaste_2019-06-16_13-51-13" /></p>
+
+<p>其中选择几个</p>
+
+<ul>
+<li>ApplicationContextAware：给我们自定义的组件添加Spring自己的ApplicationContext，即IOC容器。</li>
+<li>BeanNameAware：Spring给我们实例化组件后给这个组件起名字。</li>
+<li>EmbeddedValueResolverAware：解析字符串，可以解析${}:环境变量的值，#{}spring自定义的。</li>
+</ul>
+
+<pre><code class="language-java">@Component
+public class Blue implements ApplicationContextAware, BeanNameAware, EmbeddedValueResolverAware {
+
+private ApplicationContext applicationContext;
+
+@Override
+public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    this.applicationContext = applicationContext;
+}
+
+
+public ApplicationContext getApplicationContext(){
+    return applicationContext;
+}
+
+@Override
+public void setBeanName(String name) {
+    System.out.println(&quot;bean 的名字是：&quot; + name);
+}
+
+@Override
+public void setEmbeddedValueResolver(StringValueResolver resolver) {
+    String str = &quot;系统名称为：${os.name}----20*18 = #{20*18}&quot;;
+    System.out.println(resolver.resolveStringValue(str));
+}
+}
+</code></pre></li>
+</ul>
+
+<p>处理某个Aware的处理器，就是原来我们说过的PostProcessor：后置处理器，处理ApplicationContextAware的处理器就是ApplicationContextAwarePostProcessor，原理和上面BeanPostProcessor类似。</p>
+
+<h4 id="16-使用-profile注解实现不同环境的切换">16.使用@Profile注解实现不同环境的切换</h4>
+
+<p>在开发中可能会遇到这样的问题，假如说开发的时候用到的数据库为数据库a，测试的时候用的是数据库b，而上线的时候用到的事数据库c，那么我们应该如何通过更改更少的代码来实现这个功能呢？</p>
+
+<p>Spring给我们实现了这个功能，我们可以通过给不同的组件添加@Profile注解，在运行的时候激活相应的环境来将对应的组件添加到IOC容器中，比如说，我设置了三个数据库连接池对象，一个添加的@Profile注解为dev，一个为test，一个为prod，那么我在运行的时候如果激活dev环境，那么另外两个组件都不会添加到IOC容器中。</p>
+
+<p>我们来看一下@Profile注解的代码。</p>
+
+<pre><code class="language-java">@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Conditional(ProfileCondition.class)
+public @interface Profile {
+
+	/**
+	 * The set of profiles for which the annotated component should be registered.
+	 */
+	String[] value();
+
+}
+</code></pre>
+
+<ul>
+<li><p>关于如何激活相应的环境</p>
+
+<ul>
+<li>使用命令行参数：-Dspring.profiles.active=你想激活的profile</li>
+<li>使用代码激活：</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-java">          AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+
+          applicationContext.getEnvironment().setActiveProfiles(&quot;dev&quot;);
+
+          applicationContext.register(MainConfigOfProfile.class);
+
+          applicationContext.refresh();
+</code></pre>
+
+<h4 id="17-使用aop注解开发-通过注解-enableaspectjautoproxy注解">17.使用AOP注解开发，通过注解@EnableAspectJAutoProxy注解</h4>
+
+<ul>
+<li><p>介绍一些AOP中的名词：</p>
+
+<ul>
+<li><code>Aspect</code>（切面）： Aspect 声明类似于 Java 中的类声明，在 Aspect 中会包含着一些 Pointcut 以及相应的 Advice。</li>
+<li><code>Joint point</code>（连接点）：表示在程序中明确定义的点，典型的包括方法调用，对类成员的访问以及异常处理程序块的执行等等，它自身还可以嵌套其它 joint point。</li>
+<li><code>Pointcut</code>（切点）：表示一组 joint point，这些 joint point 或是通过逻辑关系组合起来，或是通过通配、正则表达式等方式集中起来，它定义了相应的 Advice 将要发生的地方。</li>
+<li><code>Advice</code>（增强）：Advice 定义了在 <code>Pointcut</code> 里面定义的程序点具体要做的操作，它通过 before、after 和 around 来区别是在每个 joint point 之前、之后还是代替执行的代码。</li>
+<li><code>Target</code>（目标对象）：织入 <code>Advice</code> 的目标对象.。</li>
+<li><code>Weaving</code>（织入）：将 <code>Aspect</code> 和其他对象连接起来, 并创建 <code>Advice</code>d object 的过程</li>
+</ul></li>
+
+<li><p>将<strong>切面类</strong>和被<strong>增强的类</strong>添加到IOC容器中，让Spring管理从而实现Spring的切面AOP</p></li>
+
+<li><p>被增强的类：</p>
+
+<ul>
+<li><pre><code class="language-java">public class MathCalculate {
+
+public int div(int x,int y){
+    return x/y;
+}
+}
+
+</code></pre>
+
+<ul>
+<li><p>切面类（XML配置）将相应组件先放入IOC容器中</p></li>
+
+<li><p>在config中配置pointcut：也叫切点。简单来说就是要被增强的方法。</p></li>
+
+<li><p>在config中配置aspect：这里面写的是自己定义的java切面类，定义增强的方法</p></li>
+
+<li><p>在aspect中有五种增强的方法（说四种）：</p></li>
+
+<li><p>在<strong>被增强方法之前</strong>调用的方法：aop:before</p></li>
+
+<li><p>在被增强方法之后调用的方法，无论是正常返回还是有异常都会运行：aop:after</p></li>
+
+<li><p>在被增强方法正常返回后调用的方法：aop:after-returning</p></li>
+
+<li><p>在被增强方法抛出异常后调用的方法：aop:after-throwing</p></li>
+
+<li><p>```java
+<a href="aop:config">aop:config</a>
+<aop:pointcut id="pointcut1" expression="execution( * cn.jack.aop.MathCalculate.*(..))"/>
+<aop:aspect id="a" ref="aspect">
+    <aop:before method="logStart" pointcut-ref="pointcut1"/>
+    <aop:after method="logEnd" pointcut-ref="pointcut1"/>
+    <aop:after-returning method="logReturn" pointcut-ref="pointcut1" returning="arg"/>
+    <aop:after-throwing method="logException" throwing="e" pointcut-ref="pointcut1"/>
+<a href="/aop:aspect">/aop:aspect</a>
+<a href="/aop:config">/aop:config</a></p></li>
+</ul>
+
+<p><bean id="mathCalculate" class="cn.jack.aop.MathCalculate"/></p>
+
+<p><bean id="aspect" class="cn.jack.aop.AspectJ" /></p>
+
+<pre><code>
+</code></pre>
+
+<p>```</p></li>
+</ul></li>
+
+<li><p>切面类（注解方式）</p></li>
+
+<li><p>书写配置类，添加两个注解，@Configration注解和@EnableAspectJAutoProxy注解。</p></li>
+
+<li><p>在配置类中将被增强的类和切面类添加到IOC容器中。</p>
+
+<ul>
+<li><pre><code class="language-java">@Aspect
+public class LogAspectJ {
+
+@Pointcut(&quot;execution( public  int cn.jack.aop.MathCalculate.*(..))&quot;)
+public void pointcut(){}
+
+@Before(&quot;pointcut()&quot;)
+public void logStart(JoinPoint joinPoint){
+    System.out.println(&quot;method  &quot; + joinPoint.getSignature().getName() + &quot;  runs...&quot;);
+}
+
+@AfterReturning(value = &quot;pointcut()&quot;,returning = &quot;arg&quot;)
+public void logReturn(JoinPoint joinPoint,Object arg){
+    System.out.println(&quot;method&quot; + joinPoint.getSignature().getName() + &quot;  ends, result is  &quot; + arg );
+}
+
+@After(&quot;pointcut()&quot;)
+public void logEnd(JoinPoint joinPoint){
+    System.out.println(&quot;method &quot; + joinPoint.getSignature().getName() + &quot;  ends&quot;);
+}
+
+@AfterThrowing(value = &quot;pointcut()&quot;,throwing = &quot;e&quot;)
+public void logException(JoinPoint joinPoint,Exception e){
+    System.out.println(&quot;method &quot; + joinPoint.getSignature().getName() + &quot;  throws exception \n &quot; + e);
+}
+}
+</code></pre>
+
+<h4 id="18-enableaspectjautoproxy注解详解">18.@EnableAspectJAutoProxy注解详解</h4>
+
+<ul>
+<li><p>这个注解上添加了<strong>@Import(AspectJAutoProxyRegistrar.class)</strong>，而这个@Import注解是向IOC容器中导入一些组件的，所以说，<strong>@EnableAspectJAutoProxy</strong>注解首先是将<strong>AspectJAutoProxyRegistrar</strong>这个类的对象放到IOC容器中。</p></li>
+
+<li><p>通过<strong>AspectJAutoProxyRegistrar</strong>这个对象最终给容器注册一个<strong>AnnotationAwareAspectJAutoProxyCreator</strong>对象，定义信息名称为<strong>org.springframework.aop.config.internalAutoProxyCreator</strong>。</p></li>
+
+<li><p>AnnotationAwareAspectJAutoProxyCreator对象的继承关系，找寻他的父类</p></li>
+</ul>
+
+<p>&mdash;&gt;AspectJAwareAdvisorAutoProxyCreator</p>
+
+<p>&mdash;&gt;AbstractAdvisorAutoProxyCreator</p>
+
+<p>&mdash;&gt;AbstractAutoProxyCreator</p>
+
+<p>​ 实现了 <strong>SmartInstantiationAwareBeanPostProcessor</strong>, <strong>BeanFactoryAware</strong> 这两个接口</p>
+
+<ul>
+<li><strong>SmartInstantiationAwareBeanPostProcessor</strong> 接口：一个Bean后置处理器，在初始化前后调用相应的方法，详见第11节中所有的BeanPostProcessor继承实现关系或者源代码。</li>
+
+<li><p><strong>BeanFactoryAware</strong> 接口：自动注入BeanFactory对象。详见15节中Aware的作用。</p></li>
+
+<li><p>查找接口的方法实现，BeanPostProcessor接口是bean的后置处理器，会有bean初始化之前初始化之后的一些方法，Aware接口是给容器中注册其他容器的接口，会有set方法，查找。</p></li>
+
+<li><p>AbstractAutoProxyCreator  实现了setBeanFactory方法，postProcessAfterInitialization方法</p></li>
+
+<li><p>AbstractAdvisorAutoProxyCreator.setBeanFactory()&mdash;-&gt;initBeanFactory()</p></li>
+
+<li><p>AspectJAwareAdvisorAutoProxyCreator 无</p></li>
+
+<li><p>AnnotationAwareAspectJAutoProxyCreator.initBeanFactory()</p></li>
+
+<li><p><strong>这个注解工作的总流程：</strong></p></li>
+
+<li><p>首先获得IOC容器，传入配置类，将IOC容器进行刷新。</p></li>
+
+<li><p>registerBeanPostProcessors方法，注册bean的后置处理区来方便对于bean的拦截</p></li>
+
+<li><p>先获取IOC容器中已经定义的需要创建对象的所有BeanPostProcessor</p></li>
+
+<li><p>给容器中添加别的BeanPostProcessor</p></li>
+
+<li><p>优先注册实现PriorityOrdered接口的BeanPostProcessor</p></li>
+
+<li><p>注册实现Ordered接口的BeanPostProcessor</p></li>
+
+<li><p>注册常规的BeanPostProcessor</p></li>
+
+<li><p>注册BeanPostProcessor就是在IOC容器中添加组件。创建名字为org.springframework.aop.config.internalAutoProxyCreator的BeanPostProcessor&ndash;它的类型是【AnnotationAwareAspectJAutoProxyCreator】</p></li>
+
+<li><p>创建bean</p></li>
+
+<li><p>populateBean，给bean的各种属性赋值</p></li>
+
+<li><p>initializeBean，初始化bean</p></li>
+
+<li><p>invokeAwareMethods，判断是否实例化了Aware接口，调用set方法</p></li>
+
+<li><p>applyBeanPostProcessorsBeforeInitialization，后置处理器方法，bean初始化之前调用</p></li>
+
+<li><p>invokeInitMethods调用bean的初始化方法</p></li>
+
+<li><p>applyBeanPostProcessorsAfterInitialization，后置处理器方法，bean初始化之后调用</p></li>
+
+<li><p>BeanPostProcessor创建成功【AnnotationAwareAspectJAutoProxyCreator】</p></li>
+
+<li><p>把BeanPostProcessor注册到beanFactory中，beanFactory.addBeanPostProcessor</p></li>
+
+<li><p><strong>AnnotationAwareAspectJAutoProxyCreator</strong>这个类的工作时机</p></li>
+
+<li><p>还是先在IOC容器的初始化中的refresh方法中<strong>finishBeanFactoryInitialization</strong>(beanFactory);完成beanfactory的初始化工作，实例所有剩下的bean。</p></li>
+
+<li><p>具体(和之前类似) getBean&ndash;&gt;doGetBean&ndash;&gt;getSingleton</p></li>
+</ul></li>
+</ul></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

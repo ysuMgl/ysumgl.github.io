@@ -6,10 +6,22 @@
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 May 2019 20:19:07 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 12 Aug 2019 20:56:10 +0800</lastBuildDate>
     
 	<atom:link href="https://ysumgl.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spring 注解开发</title>
+      <link>https://ysumgl.github.io/spring-%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Mon, 12 Aug 2019 20:56:10 +0800</pubDate>
+      
+      <guid>https://ysumgl.github.io/spring-%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/</guid>
+      <description>Spring 注解开发 1.@Bean注解和@Configration注解 在原来的Spring开发中，我们都是通过配置xml的方式，通过bean标签将对象放到IOC容器中，例如
+&amp;lt;bean id = &amp;quot;person&amp;quot; class = &amp;quot;cn.jack.Person&amp;quot;&amp;gt; &amp;lt;property name = &amp;quot;name&amp;quot; value = &amp;quot;zhangsan&amp;quot;&amp;gt;&amp;lt;/property&amp;gt; &amp;lt;property name = &amp;quot;age&amp;quot; value = &amp;quot;20&amp;quot;&amp;gt;&amp;lt;/property&amp;gt; &amp;lt;/bean&amp;gt;  然后在测试类中获取IOC容器中对象的方法为：
+@Test public void test1(){ ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(&amp;quot;beans.xml&amp;quot;); Person person = (Person) applicationContext.getBean(&amp;quot;person&amp;quot;); System.out.println(person); }  如果通过Spring注解的方式，则不需要这些配置文件，需要建立一个配置类来顶替配置文件，在配置类上面标注@Configration注解，表明这个类是一个配置类。通过在类中定义相应返回值的方法，标注@Bean注解。Spring默认将方法名称作为id，方法返回值类型作为class，如果要自定义id的话，在@Bean注解value值设为相应的id。
+@Configuration public class MainConfig { @Bean public Person person(){ return new Person(&amp;quot;lisi&amp;quot;,20); } @Bean(&amp;quot;person1&amp;quot;) public Person other(){ return new Person(&amp;quot;zhagnsan&amp;quot;,18); } }  通过定义配置类，将相应对象放到了IOC容器中，那么我们如何像xml方式那种获取对应的ApplicationContext呢？</description>
+    </item>
     
     <item>
       <title>Hugo介绍</title>
